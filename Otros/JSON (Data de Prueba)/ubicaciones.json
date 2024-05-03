@@ -1,0 +1,212 @@
+[
+    {
+        "zone": "AA",
+        "aisle": "1",
+        "shelf": "1",
+        "capacity": 10,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "AA",
+        "aisle": "1",
+        "shelf": "2",
+        "capacity": 15,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "AA",
+        "aisle": "1",
+        "shelf": "3",
+        "capacity": 12,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "AA",
+        "aisle": "2",
+        "shelf": "1",
+        "capacity": 14,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "AA",
+        "aisle": "2",
+        "shelf": "2",
+        "capacity": 18,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "AA",
+        "aisle": "2",
+        "shelf": "3",
+        "capacity": 16,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "BB",
+        "aisle": "1",
+        "shelf": "1",
+        "capacity": 20,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "BB",
+        "aisle": "1",
+        "shelf": "2",
+        "capacity": 25,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "BB",
+        "aisle": "1",
+        "shelf": "3",
+        "capacity": 23,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "BB",
+        "aisle": "2",
+        "shelf": "1",
+        "capacity": 19,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "BB",
+        "aisle": "2",
+        "shelf": "2",
+        "capacity": 22,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "BB",
+        "aisle": "2",
+        "shelf": "3",
+        "capacity": 18,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "CC",
+        "aisle": "1",
+        "shelf": "1",
+        "capacity": 15,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "CC",
+        "aisle": "1",
+        "shelf": "2",
+        "capacity": 17,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "CC",
+        "aisle": "1",
+        "shelf": "3",
+        "capacity": 14,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "CC",
+        "aisle": "2",
+        "shelf": "1",
+        "capacity": 16,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "CC",
+        "aisle": "2",
+        "shelf": "2",
+        "capacity": 20,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "CC",
+        "aisle": "2",
+        "shelf": "3",
+        "capacity": 18,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "DD",
+        "aisle": "1",
+        "shelf": "1",
+        "capacity": 17,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "DD",
+        "aisle": "1",
+        "shelf": "2",
+        "capacity": 20,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "DD",
+        "aisle": "1",
+        "shelf": "3",
+        "capacity": 15,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "DD",
+        "aisle": "2",
+        "shelf": "1",
+        "capacity": 12,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "DD",
+        "aisle": "2",
+        "shelf": "2",
+        "capacity": 14,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "DD",
+        "aisle": "2",
+        "shelf": "3",
+        "capacity": 16,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "EE",
+        "aisle": "1",
+        "shelf": "1",
+        "capacity": 11,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "EE",
+        "aisle": "1",
+        "shelf": "2",
+        "capacity": 13,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "EE",
+        "aisle": "1",
+        "shelf": "3",
+        "capacity": 10,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "EE",
+        "aisle": "2",
+        "shelf": "1",
+        "capacity": 14,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "EE",
+        "aisle": "2",
+        "shelf": "2",
+        "capacity": 12,
+        "capacityUnit": "m3"
+    },
+    {
+        "zone": "EE",
+        "aisle": "2",
+        "shelf": "3",
+        "capacity": 15,
+        "capacityUnit": "m3"
+    }
+]

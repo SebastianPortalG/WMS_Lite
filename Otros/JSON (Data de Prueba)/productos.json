@@ -1,0 +1,102 @@
+[
+    {
+        "productName": "Cerveza Pilsen 330 ml",
+        "productDescription": "Cerveza Pilsen, botella de 330 ml. Sabor clásico.",
+        "categoryName": "Cervezas"
+    },
+    {
+        "productName": "Agua San Mateo 1L",
+        "productDescription": "Agua mineral San Mateo, botella de 1 litro. Agua pura de manantial.",
+        "categoryName": "Aguas"
+    },
+    {
+        "productName": "Jugo de Naranja Natural 500 ml",
+        "productDescription": "Jugo de naranja 100% natural, sin azúcares añadidos, 500 ml.",
+        "categoryName": "Jugos Naturales"
+    },
+    {
+        "productName": "Leche Entera Gloria 1L",
+        "productDescription": "Leche entera Gloria, 1 litro. Rica en calcio y vitaminas.",
+        "categoryName": "Lacteos"
+    },
+    {
+        "productName": "Vino Tinto Merlot 750 ml",
+        "productDescription": "Vino tinto Merlot, botella de 750 ml. Añejado en barricas de roble.",
+        "categoryName": "Bebidas Alcohólicas"
+    },
+    {
+        "productName": "Cerveza Corona 355 ml",
+        "productDescription": "Cerveza Corona, botella de 355 ml. Ideal para disfrutar con limón.",
+        "categoryName": "Cervezas"
+    },
+    {
+        "productName": "Gaseosa Sprite 2L",
+        "productDescription": "Gaseosa Sprite, botella de 2 litros. Refrescante y burbujeante.",
+        "categoryName": "Bebidas Gaseosas"
+    },
+    {
+        "productName": "Chocolate en Polvo Nestlé 300g",
+        "productDescription": "Chocolate en polvo Nestlé, 300 gramos. Ideal para preparar bebidas y postres.",
+        "categoryName": "Alimentos"
+    },
+    {
+        "productName": "Café Tostado Molido Juan Valdez 500g",
+        "productDescription": "Café tostado y molido Juan Valdez, 500 gramos. Sabor intenso y aroma profundo.",
+        "categoryName": "Cafés"
+    },
+    {
+        "productName": "Té Negro Lipton 100 bolsas",
+        "productDescription": "Té negro Lipton, caja de 100 bolsas. Perfecto para cualquier hora del día.",
+        "categoryName": "Tés"
+    },
+    {
+        "productName": "Mantequilla de Maní 250g",
+        "productDescription": "Mantequilla de maní, tarro de 250 gramos. Sin aditivos ni conservantes.",
+        "categoryName": "Alimentos"
+    },
+    {
+        "productName": "Avena Integral 500g",
+        "productDescription": "Avena integral, bolsa de 500 gramos. Nutritiva y saludable.",
+        "categoryName": "Alimentos"
+    },
+    {
+        "productName": "Cerveza Budweiser 330 ml",
+        "productDescription": "Cerveza Budweiser, botella de 330 ml. Conocida mundialmente por su suavidad.",
+        "categoryName": "Cervezas"
+    },
+    {
+        "productName": "Gaseosa Inca Kola 3L",
+        "productDescription": "Gaseosa Inca Kola, botella de 3 litros. El sabor original de Perú.",
+        "categoryName": "Bebidas Gaseosas"
+    },
+    {
+        "productName": "Vodka Absolut 1L",
+        "productDescription": "Vodka Absolut, botella de 1 litro. Puro y refinado.",
+        "categoryName": "Bebidas Alcohólicas"
+    },
+    {
+        "productName": "Ron Bacardi Superior 750 ml",
+        "productDescription": "Ron Bacardi Superior, botella de 750 ml. Suave y aromático.",
+        "categoryName": "Bebidas Alcohólicas"
+    },
+    {
+        "productName": "Agua Evian 1.5L",
+        "productDescription": "Agua Evian, botella de 1.5 litros. Proveniente de los Alpes franceses.",
+        "categoryName": "Aguas"
+    },
+    {
+        "productName": "Jugo de Manzana 1L",
+        "productDescription": "Jugo de manzana, botella de 1 litro. Extraído de manzanas frescas.",
+        "categoryName": "Jugos Naturales"
+    },
+    {
+        "productName": "Yogur Griego 200g",
+        "productDescription": "Yogur griego, envase de 200 gramos. Cremoso y rico en proteínas.",
+        "categoryName": "Lacteos"
+    },
+    {
+        "productName": "Queso Feta 200g",
+        "productDescription": "Queso feta, paquete de 200 gramos. Ideal para ensaladas y platillos mediterráneos.",
+        "categoryName": "Lacteos"
+    }
+]
