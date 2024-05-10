@@ -1,19 +1,23 @@
 import React from 'react';
 import { Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, Button } from '@mui/material';
 
-const DeleteDialog = ({ open, onClose, onConfirm, item }) => (
+
+
+const DeleteDialog = ({ open, onClose, onConfirm, item }) => {
+    const confirmMessage = item.name ? `¿Está seguro que desea eliminar: ${item.name}?` : '¿Está seguro que desea eliminar esta ubicación?';
+    return(
     <Dialog open={open} onClose={onClose}>
         <DialogTitle>Confirmación</DialogTitle>
         <DialogContent>
             <DialogContentText>
-                ¿Esta seguro que desea eliminar: {item.name}?
+                {confirmMessage}
             </DialogContentText>
         </DialogContent>
         <DialogActions>
             <Button onClick={onClose} color="primary">Cancelar</Button>
             <Button onClick={onConfirm} color="secondary">Eliminar</Button>
         </DialogActions>
-    </Dialog>
-);
+    </Dialog>);
+}
 
 export default DeleteDialog;

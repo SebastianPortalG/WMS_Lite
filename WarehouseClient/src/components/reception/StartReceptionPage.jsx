@@ -22,16 +22,18 @@ const StartReceptionPage = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [products, setProducts] = useState([]);
   const [batches, setBatches] = useState([]);
+  const[search,setSearch] = useState('');
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchProducts('');
-  }, []);
+    fetchProducts(search||'');
+  }, [search]);
 
   const fetchProducts = async (search) => {
-    const { data, error } = await ApiService.fetchProducts(0, 15, search);
+    const { data, error } = await ApiService.fetchProducts({
+      page: 0, size: 50,search: search,sort: null,sortDirection: null});
     if (!error) {
       setProducts(data.content);
     } else {
@@ -144,7 +146,7 @@ const StartReceptionPage = () => {
             getOptionLabel={(option) => option.name}
             isOptionEqualToValue={(option, value) => option.productId === value.productId}
             style={{ width: '100%' }}
-            renderInput={(params) => <TextField {...params} label="Search Products" variant="outlined" />}
+            renderInput={(params) => <TextField {...params} label="Buscar Productos" variant="outlined" />}
           />
         </Grid>
         {batches.map((batch, index) => (
@@ -184,10 +186,10 @@ const StartReceptionPage = () => {
           </Grid>
         ))}
         <Grid item xs={12}>
-          <Button onClick={handleAddBatch} startIcon={<AddBoxIcon />} sx={{ width: '100%' }}>Add Another Batch</Button>
+          <Button onClick={handleAddBatch} startIcon={<AddBoxIcon />} sx={{ width: '100%' }}>Recibir lote</Button>
         </Grid>
         <Grid item xs={12}>
-          <Button onClick={handleSaveReception} sx={{ width: '100%', mt: 1 }}>Save Reception</Button>
+          <Button onClick={handleSaveReception} sx={{ width: '100%', mt: 1 }}>Guardar y confirmar</Button>
         </Grid>
       </Grid>
       <Modal

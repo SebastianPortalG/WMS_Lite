@@ -1,5 +1,6 @@
 package com.sebastianportal.warehouseservice.service;
 
+import com.sebastianportal.warehouseservice.dto.SimpleBatchResponseDto;
 import com.sebastianportal.warehouseservice.model.*;
 import com.sebastianportal.warehouseservice.repository.BatchRepository;
 import com.sebastianportal.warehouseservice.repository.LocationRepository;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StorageService {
@@ -55,6 +58,55 @@ public class StorageService {
 
         return storage;
     }
+
+    @Transactional
+    public Storage moveBatch(Integer batchId, Integer sourceLocationId, Integer targetLocationId, Integer quantity, User user) {
+        Storage sourceStorage = storageRepository.findByBatch_BatchIdAndLocation_LocationId(batchId, sourceLocationId)
+                .orElseThrow(() -> new EntityNotFoundException("Storage not found for specified batch and location"));
+
+        Location location = locationRepository.findById(targetLocationId)
+                .orElseThrow(() -> new EntityNotFoundException("Location not found with id: " + targetLocationId));
+
+        if (sourceStorage.getStoredQuantity() < quantity) {
+            throw new IllegalArgumentException("Insufficient quantity available for movement.");
+        }
+
+        sourceStorage.setStoredQuantity(sourceStorage.getStoredQuantity() - quantity);
+        storageRepository.save(sourceStorage);
+
+        Storage targetStorage = storageRepository.findByBatch_BatchIdAndLocation_LocationId(batchId, targetLocationId)
+                .orElseGet(() -> {
+                    Storage newStorage = new Storage();
+                    newStorage.setBatch(batchRepository.findById(batchId).get());
+                    newStorage.setLocation(location); // This assumes Location entity setup to handle this.
+                    newStorage.setStoredQuantity(0); // Initially zero, will be set below
+                    return newStorage;
+                });
+
+        targetStorage.setStoredQuantity(targetStorage.getStoredQuantity() + quantity);
+        targetStorage.setStoredDateTime(LocalDateTime.now());
+        targetStorage.setCreatedBy(user.getUsername());
+        storageRepository.save(targetStorage);
+
+        // If the source storage is now empty, remove it.
+        if (sourceStorage.getStoredQuantity() == 0) {
+            storageRepository.delete(sourceStorage);
+        }
+
+        return targetStorage;
+    }
+
+    public List<SimpleBatchResponseDto> getBatchesByLocation(Integer locationId) {
+        return storageRepository.findByLocation_LocationId(locationId).stream()
+                .map(storage -> new SimpleBatchResponseDto(
+                        storage.getBatch().getBatchId(),
+                        storage.getBatch().getItem().getName(),
+                        storage.getBatch().getAvailableQuantity(),
+                        storage.getBatch().getExpiryDate()
+                ))
+                .collect(Collectors.toList());
+    }
+
     private void updateReceptionMasterIfFinished(ReceptionMaster receptionMaster) {
         boolean allStored = receptionMaster.getBatches().stream()
                 .allMatch(batch -> batch.getAvailableQuantity() == 0);

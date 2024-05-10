@@ -76,6 +76,7 @@ const BatchStoragePage = () => {
       const { error } = await ApiService.storeBatchInLocationReception(receptionId, selectedBatch.batchId, location.locationId, quantity);
       if (!error) {
         setLocation(null);
+        setQuantity(null);
         navigate(`/batch-storage/${receptionId}`); 
       } else {
         console.error("Storage failed:", error);
@@ -103,7 +104,6 @@ const BatchStoragePage = () => {
           <Button variant="contained" onClick={startScanning} disabled={isScanning} sx={{ mb: 2 }}>
             Escanear
           </Button>
-          <video ref={videoRef} style={{ width: '100%', marginBottom: '20px' }} />
         </>
       )}
       {location && (
@@ -138,6 +138,7 @@ const BatchStoragePage = () => {
           </Button>
         </>
       )}
+       <video ref={videoRef} style={{ width: '100%', marginBottom: '20px' }} />
       <Modal
         open={showConfirmModal}
         onClose={() => setShowConfirmModal(false)}

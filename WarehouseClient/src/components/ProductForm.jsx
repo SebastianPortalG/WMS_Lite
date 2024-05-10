@@ -34,7 +34,8 @@ function ProductForm({ open, onClose, onSave, product }) {
         category: product.category,
         rotation: product.rotation,
         consumable: product.consumable,
-        expires: product.expires
+        expires: product.expires,
+        active: product.active
         // description: '',
         // category: null,
         // rotation: null,
@@ -120,6 +121,15 @@ function ProductForm({ open, onClose, onSave, product }) {
             />
           }
           label="¿Perecedero?"
+        />
+        <FormControlLabel
+          control={
+            <Checkbox
+              checked={formData.active}
+              onChange={(e) => handleChange('active', e.target.checked)}
+            />
+          }
+          label="Activo?"
         />
       </DialogContent>
       <DialogActions>

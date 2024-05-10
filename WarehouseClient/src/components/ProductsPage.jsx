@@ -21,6 +21,7 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
     alignItems: 'center',
     padding: `${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(1)}px`,
     width: '100%',
+    overflow: 'auto', 
 }));
 
 const modalStyle = {
@@ -65,17 +66,17 @@ const SearchInput = ({ onSearch }) => {
 
 const columns = [
     { field: 'productId', headerName: 'ID', width: 10 },
-    { field: 'name', headerName: 'Nombre', width: 180 },
-    { field: 'description', headerName: 'Descripcion', width: 250, wrapText: true },
+    { field: 'name', headerName: 'Nombre', width: 350 },
+    { field: 'description', headerName: 'Descripcion', width: 700, wrapText: true },
     {
         field: 'category',
         headerName: 'Categoria',
-        width: 120,
+        width: 250,
         valueGetter: (params) => params?.name ?? 'N/A'
     },
-    { field: 'rotation', headerName: 'Rotacion', flex: 0.3, valueGetter: (params) => params.rotacion ?? 'N/A' },
-    { field: 'consumable', headerName: 'Consumible', flex: 0.3, type: 'boolean' },
-    { field: 'active', headerName: 'Activo', flex: 0.3, type: 'boolean' },
+    { field: 'rotation', headerName: 'Rotacion', flex: 0.1, valueGetter: (params) => params.rotacion ?? 'N/A' },
+    { field: 'consumable', headerName: 'Consumible', flex: 0.1, type: 'boolean' },
+    { field: 'active', headerName: 'Activo', flex: 0.1, type: 'boolean' },
 ];
 
 

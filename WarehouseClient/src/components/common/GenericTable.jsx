@@ -12,7 +12,7 @@ const GenericTable = ({ columns, rows, loading, onPaginationModelChange, rowCoun
     field: 'actions',
     type: 'actions',
     headerName: 'Acciones',
-    width: 100,
+    flex: 0.2,
     getActions: (params) => [
       <GridActionsCellItem
         icon={<EditIcon />}
@@ -31,7 +31,7 @@ const GenericTable = ({ columns, rows, loading, onPaginationModelChange, rowCoun
   };
   const finalColumns = showActions ? [...columns, actionColumn] : columns;
   return (
-    <div style={{ height: 650, width: '100%', flexGrow: 1 }}>
+    <div style={{ height: '650px', width: '100%', flexGrow: 1 }}>
       <DataGrid
         paginationModel={{ page: parseInt(page), pageSize: parseInt(pageSize) }}
         onPaginationModelChange={onPaginationModelChange}
@@ -41,7 +41,7 @@ const GenericTable = ({ columns, rows, loading, onPaginationModelChange, rowCoun
         onPageSizeChange={onPageSizeChange}
         onPageChange={onPageChange}
         page={page}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5, 10, 20]}
         paginationMode="server"
         rowCount={rowCount || -1}
         pagination

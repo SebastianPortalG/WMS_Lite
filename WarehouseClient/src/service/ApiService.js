@@ -218,6 +218,29 @@ export const ApiService = {
         }
       })
     ),
+    //Storage
+    getBatchesByLocation: (locationId) =>
+  handleApiCall(() =>
+    api.get(`/location/${locationId}/batches`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+  ),
+
+moveBatch: (batchId, sourceLocationId, targetLocationId, quantity) =>
+  handleApiCall(() =>
+    api.post('/move', {
+      batchId,
+      sourceLocationId,
+      targetLocationId,
+      quantity
+    }, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+    })
+  ),
 };
 
 export default ApiService;

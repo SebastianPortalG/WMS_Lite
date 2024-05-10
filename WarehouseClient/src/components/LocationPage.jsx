@@ -20,8 +20,8 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
     alignItems: 'center',
     padding: `${theme.spacing(1)}px ${theme.spacing(1)}px ${theme.spacing(1)}px`,
     width: '100%',
+    overflow: 'auto',
 }));
-
 
 
 const locationColumns = [
@@ -137,7 +137,7 @@ const LocationsPage = () => {
                         />
                     )}
                     {confirmDeleteOpen && (
-                        <ConfirmDialog
+                        <DeleteDialog
                             open={confirmDeleteOpen}
                             onClose={() => setConfirmDeleteOpen(false)}
                             onConfirm={handleConfirmDelete}

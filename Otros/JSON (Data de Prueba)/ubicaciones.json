@@ -1,212 +1,212 @@
 [
     {
-        "zone": "AA",
+        "zone": "AA - Bebidas",
         "aisle": "1",
         "shelf": "1",
-        "capacity": 10,
+        "capacity": 1,
         "capacityUnit": "m3"
     },
     {
-        "zone": "AA",
+        "zone": "AA - Bebidas",
         "aisle": "1",
         "shelf": "2",
         "capacity": 15,
-        "capacityUnit": "m3"
+        "capacityUnit": "und"
     },
     {
-        "zone": "AA",
+        "zone": "AA - Bebidas",
         "aisle": "1",
         "shelf": "3",
-        "capacity": 12,
+        "capacity": 2,
         "capacityUnit": "m3"
     },
     {
-        "zone": "AA",
+        "zone": "AA - Bebidas",
         "aisle": "2",
         "shelf": "1",
         "capacity": 14,
-        "capacityUnit": "m3"
+        "capacityUnit": "und"
     },
     {
-        "zone": "AA",
+        "zone": "AA - Bebidas",
         "aisle": "2",
         "shelf": "2",
-        "capacity": 18,
+        "capacity": 1,
         "capacityUnit": "m3"
     },
     {
-        "zone": "AA",
+        "zone": "AA - Bebidas",
         "aisle": "2",
         "shelf": "3",
         "capacity": 16,
-        "capacityUnit": "m3"
+        "capacityUnit": "und"
     },
     {
-        "zone": "BB",
+        "zone": "BB - Lacteos",
         "aisle": "1",
         "shelf": "1",
-        "capacity": 20,
-        "capacityUnit": "m3"
+        "capacity": 4,
+        "capacityUnit": "bx"
     },
     {
-        "zone": "BB",
+        "zone": "BB - Lacteos",
         "aisle": "1",
         "shelf": "2",
-        "capacity": 25,
+        "capacity": 2,
         "capacityUnit": "m3"
     },
     {
-        "zone": "BB",
+        "zone": "BB - Lacteos",
         "aisle": "1",
         "shelf": "3",
-        "capacity": 23,
+        "capacity": 1,
         "capacityUnit": "m3"
     },
     {
-        "zone": "BB",
+        "zone": "BB - Lacteos",
         "aisle": "2",
         "shelf": "1",
         "capacity": 19,
-        "capacityUnit": "m3"
+        "capacityUnit": "und"
     },
     {
-        "zone": "BB",
+        "zone": "BB - Lacteos",
         "aisle": "2",
         "shelf": "2",
-        "capacity": 22,
+        "capacity": 1,
         "capacityUnit": "m3"
     },
     {
-        "zone": "BB",
+        "zone": "BB - Lacteos",
         "aisle": "2",
         "shelf": "3",
-        "capacity": 18,
+        "capacity": 1,
         "capacityUnit": "m3"
     },
     {
-        "zone": "CC",
+        "zone": "CC - Jugos Naturales",
         "aisle": "1",
         "shelf": "1",
-        "capacity": 15,
+        "capacity": 2,
         "capacityUnit": "m3"
     },
     {
-        "zone": "CC",
+        "zone": "CC - Jugos Naturales",
         "aisle": "1",
         "shelf": "2",
         "capacity": 17,
-        "capacityUnit": "m3"
+        "capacityUnit": "und"
     },
     {
-        "zone": "CC",
+        "zone": "CC - Jugos Naturales",
         "aisle": "1",
         "shelf": "3",
-        "capacity": 14,
-        "capacityUnit": "m3"
+        "capacity": 30,
+        "capacityUnit": "und"
     },
     {
-        "zone": "CC",
+        "zone": "CC - Jugos Naturales",
         "aisle": "2",
         "shelf": "1",
-        "capacity": 16,
-        "capacityUnit": "m3"
+        "capacity": 30,
+        "capacityUnit": "und"
     },
     {
-        "zone": "CC",
+        "zone": "CC - Jugos Naturales",
         "aisle": "2",
         "shelf": "2",
         "capacity": 20,
-        "capacityUnit": "m3"
+        "capacityUnit": "und"
     },
     {
-        "zone": "CC",
+        "zone": "CC - Jugos Naturales",
         "aisle": "2",
         "shelf": "3",
-        "capacity": 18,
-        "capacityUnit": "m3"
+        "capacity": 5,
+        "capacityUnit": "bx"
     },
     {
-        "zone": "DD",
+        "zone": "DD - Bebidas Alcoholicas",
         "aisle": "1",
         "shelf": "1",
-        "capacity": 17,
-        "capacityUnit": "m3"
+        "capacity": 20,
+        "capacityUnit": "und"
     },
     {
-        "zone": "DD",
+        "zone": "DD - Bebidas Alcoholicas",
         "aisle": "1",
         "shelf": "2",
         "capacity": 20,
-        "capacityUnit": "m3"
+        "capacityUnit": "und"
     },
     {
-        "zone": "DD",
+        "zone": "DD - Bebidas Alcoholicas",
         "aisle": "1",
         "shelf": "3",
-        "capacity": 15,
-        "capacityUnit": "m3"
+        "capacity": 20,
+        "capacityUnit": "und"
     },
     {
-        "zone": "DD",
+        "zone": "DD - Bebidas Alcoholicas",
         "aisle": "2",
         "shelf": "1",
-        "capacity": 12,
-        "capacityUnit": "m3"
+        "capacity": 15,
+        "capacityUnit": "und"
     },
     {
-        "zone": "DD",
+        "zone": "DD - Bebidas Alcoholicas",
         "aisle": "2",
         "shelf": "2",
-        "capacity": 14,
-        "capacityUnit": "m3"
+        "capacity": 15,
+        "capacityUnit": "und"
     },
     {
-        "zone": "DD",
+        "zone": "DD - Bebidas Alcoholicas",
         "aisle": "2",
         "shelf": "3",
         "capacity": 16,
-        "capacityUnit": "m3"
+        "capacityUnit": "und"
     },
     {
-        "zone": "EE",
+        "zone": "EE - Alimentos",
         "aisle": "1",
         "shelf": "1",
-        "capacity": 11,
-        "capacityUnit": "m3"
+        "capacity": 4,
+        "capacityUnit": "bx"
     },
     {
-        "zone": "EE",
+        "zone": "EE - Alimentos",
         "aisle": "1",
         "shelf": "2",
-        "capacity": 13,
-        "capacityUnit": "m3"
+        "capacity": 5,
+        "capacityUnit": "bx"
     },
     {
-        "zone": "EE",
+        "zone": "EE - Alimentos",
         "aisle": "1",
         "shelf": "3",
-        "capacity": 10,
-        "capacityUnit": "m3"
+        "capacity": 5,
+        "capacityUnit": "bx"
     },
     {
-        "zone": "EE",
+        "zone": "EE - Alimentos",
         "aisle": "2",
         "shelf": "1",
-        "capacity": 14,
-        "capacityUnit": "m3"
+        "capacity": 5,
+        "capacityUnit": "bx"
     },
     {
-        "zone": "EE",
+        "zone": "EE - Alimentos",
         "aisle": "2",
         "shelf": "2",
-        "capacity": 12,
-        "capacityUnit": "m3"
+        "capacity": 5,
+        "capacityUnit": "bx"
     },
     {
-        "zone": "EE",
+        "zone": "EE - Alimentos",
         "aisle": "2",
         "shelf": "3",
-        "capacity": 15,
-        "capacityUnit": "m3"
+        "capacity": 5,
+        "capacityUnit": "bx"
     }
 ]
