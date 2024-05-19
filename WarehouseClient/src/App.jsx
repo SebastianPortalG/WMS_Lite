@@ -10,9 +10,11 @@ import LocationsPage from './components/LocationPage';
 import ReceptionPage from './components/ReceptionPage';
 import StartReceptionPage from './components/reception/StartReceptionPage';
 import StoreReceptionBatches from './components/reception/StoreReceptionBatches';
+import BatchStoragePage from './components/reception/BatchStoragePage';
+import BatchMovePage from './storage/BatchMovePage';
+import StoragePage from './storage/StoragePage';
 import QRScanner from './components/common/QRScanner';
 import './index.css';
-import BatchStoragePage from './components/reception/BatchStoragePage';
 
 
 
@@ -32,7 +34,10 @@ function App() {
           <Route path="/store-reception-batch" element={<StoreReceptionBatches />} />
           <Route path="/batch-storage/:receptionId" element={<BatchStoragePage />} />
           <Route path="/batch-storage/:receptionId/:locationId" element={<BatchStoragePage />} />
-
+          <Route path="/storage" element={<StoragePage />} />
+          <Route path="/storage/:sourceLocationId" element={<StoragePage />} />
+          <Route path="/storage/:sourceLocationId/:targetLocationId" element={<StoragePage />} />
+          <Route path="/batch-move/:locationId" element={<BatchMovePage />} />
         </Routes>
       </Router>
     </UserProvider>

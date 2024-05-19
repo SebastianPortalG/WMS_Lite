@@ -1,6 +1,7 @@
 package com.sebastianportal.warehouseservice.service;
 
 import com.sebastianportal.warehouseservice.dto.SimpleBatchResponseDto;
+import com.sebastianportal.warehouseservice.dto.StorageDto;
 import com.sebastianportal.warehouseservice.model.*;
 import com.sebastianportal.warehouseservice.repository.BatchRepository;
 import com.sebastianportal.warehouseservice.repository.LocationRepository;
@@ -70,7 +71,7 @@ public class StorageService {
         if (sourceStorage.getStoredQuantity() < quantity) {
             throw new IllegalArgumentException("Insufficient quantity available for movement.");
         }
-
+        //TODO: partir en dos endpoints xd
         sourceStorage.setStoredQuantity(sourceStorage.getStoredQuantity() - quantity);
         storageRepository.save(sourceStorage);
 
@@ -97,11 +98,12 @@ public class StorageService {
     }
 
     public List<SimpleBatchResponseDto> getBatchesByLocation(Integer locationId) {
-        return storageRepository.findByLocation_LocationId(locationId).stream()
+        return storageRepository.findByLocation_LocationId_OrderByBatch_ExpiryDate(locationId).stream()
                 .map(storage -> new SimpleBatchResponseDto(
                         storage.getBatch().getBatchId(),
+                        storage.getBatch().getCode(),
                         storage.getBatch().getItem().getName(),
-                        storage.getBatch().getAvailableQuantity(),
+                        storage.getStoredQuantity(),
                         storage.getBatch().getExpiryDate()
                 ))
                 .collect(Collectors.toList());
@@ -114,6 +116,40 @@ public class StorageService {
         if (allStored) {
             receptionMaster.setProcessFinished(true);
             receptionMasterRepository.save(receptionMaster);
+        }
+    }
+    public List<StorageDto> findStoragesByProductId(Integer productId) {
+        List<Storage> storages = storageRepository.findByProductIdOrderByExpiryDate(productId);
+
+        return storages.stream().map(storage -> {
+            SimpleBatchResponseDto batchDto = new SimpleBatchResponseDto(
+                    storage.getBatch().getBatchId(),
+                    storage.getBatch().getCode(),
+                    storage.getBatch().getItem().getName(),
+                    storage.getBatch().getAvailableQuantity(),
+                    storage.getBatch().getExpiryDate()
+            );
+            StorageDto dto = new StorageDto();
+            dto.setLocation(storage.getLocation());
+            dto.setBatch(batchDto);
+            dto.setStoredQuantity(storage.getStoredQuantity());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+    @Transactional
+    public void updateStorageForDispatch(Integer locationId, Integer batchId, Integer quantity) {
+        Storage storage = storageRepository.findByBatch_BatchIdAndLocation_LocationId(batchId, locationId)
+                .orElseThrow(() -> new EntityNotFoundException("Storage not found with locationId: " + locationId + " and batchId: " + batchId));
+
+        if (storage.getStoredQuantity() < quantity) {
+            throw new IllegalArgumentException("Insufficient stored quantity.");
+        }
+
+        storage.setStoredQuantity(storage.getStoredQuantity() - quantity);
+        if (storage.getStoredQuantity() == 0) {
+            storageRepository.delete(storage);
+        } else {
+            storageRepository.save(storage);
         }
     }
 }

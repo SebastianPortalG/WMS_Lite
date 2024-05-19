@@ -9,10 +9,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @AllArgsConstructor
-public class SimpleBatchResponseDto {
-    private Integer batchId;
-    private String code;
-    private String productName;
-    private Integer availableQuantity;
-    private LocalDateTime expiryDate;
+public class PickingOrderMinimalDto {
+    private Integer pickingOrderId;
+    private String description;
+    private LocalDateTime createdDateTime;
 }

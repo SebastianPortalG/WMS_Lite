@@ -221,24 +221,77 @@ export const ApiService = {
     //Storage
     getBatchesByLocation: (locationId) =>
   handleApiCall(() =>
-    api.get(`/location/${locationId}/batches`, {
+    api.get(`/batches/location/${locationId}/batches`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }
     })
   ),
 
-moveBatch: (batchId, sourceLocationId, targetLocationId, quantity) =>
+  moveBatch: (batchId, sourceLocationId, targetLocationId, quantity) =>
   handleApiCall(() =>
-    api.post('/move', {
-      batchId,
-      sourceLocationId,
-      targetLocationId,
-      quantity
-    }, {
+    api.post(`/batches/move?batchId=${batchId}&sourceLocationId=${sourceLocationId}&targetLocationId=${targetLocationId}&quantity=${quantity}`, {}, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       },
+    })
+  ),
+  //Dispatch
+  createDispatchMaster: (pickingOrderId) =>
+    handleApiCall(() =>
+      api.post('/dispatches/create', null, {
+        params: { pickingOrderId },
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+  updateDispatchMaster: (dispatchMasterId, updateRequest) =>
+    handleApiCall(() =>
+      api.put(`/dispatches/update/${dispatchMasterId}`, updateRequest, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+  dispatchPickingOrder: (pickingOrderId, batchId, locationId, quantity) =>
+    handleApiCall(() =>
+      api.post(`/dispatches/pickup?pickingOrderId=${pickingOrderId}&batchId=${batchId}&locationId=${locationId}&quantity=${quantity}`, {}, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+  getStoragesForDispatch: (productId) =>
+    handleApiCall(() =>
+      api.get(`/dispatches/dispatch/${productId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+  //Picking Orders
+  createPickingOrder: (dto) =>
+  handleApiCall(() =>
+  api.post('/picking-orders', dto, {
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  })
+  ),
+  addPickingOrderDetail: (pickingOrderId, pickingOrderDetail) =>
+  handleApiCall(() =>
+    api.post(`/picking-orders/${pickingOrderId}/details`, pickingOrderDetail, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    })
+  ),
+  getPickingOrderDetails: (pickingOrderId) =>
+  handleApiCall(() =>
+    api.get(`/picking-orders/${pickingOrderId}/details`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    })
+  ),
+  getPickingOrdersByDispatched: (dispatched) =>
+  handleApiCall(() =>
+    api.get('/picking-orders/search', {
+      params: { dispatched },
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+    })
+  ),
+  getActivePickingOrders: () =>
+  handleApiCall(() =>
+    api.get('/picking-orders/active', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })
   ),
 };

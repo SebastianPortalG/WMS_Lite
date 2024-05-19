@@ -21,7 +21,7 @@ public class BatchService {
     public List<SimpleBatchResponseDto> findAvailableBatchesByReceptionMaster(Integer receptionMasterId) {
         return batchRepository.findByReceptionMaster_ReceptionMasterIdAndAvailableQuantityGreaterThan(receptionMasterId, 0)
                 .stream()
-                .map(batch -> new SimpleBatchResponseDto(batch.getBatchId(), batch.getItem().getName(), batch.getAvailableQuantity(), batch.getExpiryDate()))
+                .map(batch -> new SimpleBatchResponseDto(batch.getBatchId(), batch.getCode(), batch.getItem().getName(), batch.getAvailableQuantity(), batch.getExpiryDate()))
                 .collect(Collectors.toList());
     }
 }
