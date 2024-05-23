@@ -87,4 +87,29 @@ public class ReceptionMasterService {
     public List<ReceptionMaster> findActiveReceptions() {
         return receptionMasterRepository.findByProcessFinished(false);
     }
+    @Transactional
+    public ReceptionMaster createReceptionForLeftovers(User user, List<BatchCreationDto> leftoverBatches, String description) throws ProductNotFoundException {
+        ReceptionMaster receptionMaster = new ReceptionMaster();
+        receptionMaster.setUser(user);
+        receptionMaster.setReceptionDate(LocalDateTime.now());
+        receptionMaster.setProcessFinished(false);
+        receptionMaster.setDescription(description);
+
+        receptionMaster = receptionMasterRepository.save(receptionMaster);
+
+        Set<Batch> batches = new HashSet<>();
+        for (BatchCreationDto dto : leftoverBatches) {
+            Product product = productService.findProductById(dto.getProductId());
+            Batch batch = new Batch(product, receptionMaster, user, dto.getQuantity());
+            if (product.isExpires()) {
+                batch.setExpiryDate(dto.getExpiryDate());
+                batch.generateBatchCode();
+            }
+            batches.add(batch);
+        }
+
+        batchRepository.saveAll(batches);
+
+        return receptionMaster;
+    }
 }

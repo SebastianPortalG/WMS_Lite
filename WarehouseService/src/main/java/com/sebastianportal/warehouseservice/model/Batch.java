@@ -35,7 +35,7 @@ public class Batch {
 
     @Column(nullable = false)
     private Integer storedQuantity;
-
+    private Integer dispatchedQuantity;
     @Column()
     private LocalDateTime expiryDate;
 
@@ -60,6 +60,7 @@ public class Batch {
         this.quantity = quantity;
         this.availableQuantity = quantity;
         this.storedQuantity = 0;
+        this.dispatchedQuantity = 0;
     }
     public void generateBatchCode() {
         String categoryPart = this.item.getCategory().getName();

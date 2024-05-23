@@ -140,11 +140,15 @@ public class StorageService {
     public void updateStorageForDispatch(Integer locationId, Integer batchId, Integer quantity) {
         Storage storage = storageRepository.findByBatch_BatchIdAndLocation_LocationId(batchId, locationId)
                 .orElseThrow(() -> new EntityNotFoundException("Storage not found with locationId: " + locationId + " and batchId: " + batchId));
-
+        Batch batch = batchRepository.findById(batchId)
+                .orElseThrow(() -> new EntityNotFoundException("Batch not found with id: " + batchId));
         if (storage.getStoredQuantity() < quantity) {
             throw new IllegalArgumentException("Insufficient stored quantity.");
         }
 
+        batch.setDispatchedQuantity(batch.getDispatchedQuantity() + quantity);
+        batch.setStoredQuantity(batch.getStoredQuantity() - quantity);
+        batchRepository.save(batch);
         storage.setStoredQuantity(storage.getStoredQuantity() - quantity);
         if (storage.getStoredQuantity() == 0) {
             storageRepository.delete(storage);

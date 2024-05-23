@@ -8,30 +8,27 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "PickingOrderDetail")
+@Table(name = "InventarioMaestra")
 @Getter
 @Setter
 @NoArgsConstructor
-public class PickingOrderDetail {
+public class InventoryMaster {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pickingOrderDetailId;
+    private Integer inventoryMasterId;
 
     @ManyToOne
-    @JoinColumn(name = "pickingOrderId", nullable = false)
-    private PickingOrder pickingOrder;
+    @JoinColumn(name = "userId", nullable = false)
+    private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "itemId", nullable = false)
-    private Product product;
+    private String description;
 
-    private Integer quantity;
-    private Integer pickedQuantity;
-    private Integer remainingQuantity;
-    private Integer returnedQuantity;
+    private LocalDateTime inventoryDate;
+
     @CreationTimestamp
     private LocalDateTime createdDateTime;
 
@@ -40,4 +37,7 @@ public class PickingOrderDetail {
 
     private String createdBy;
     private String modifiedBy;
+
+    @OneToMany(mappedBy = "inventoryMaster", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Inventory> inventories;
 }

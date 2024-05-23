@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/picking-orders")
@@ -74,7 +74,7 @@ public class PickingOrderController {
     public ResponseEntity<List<PickingOrderMinimalDto>> getActivePickingOrders() {
         List<PickingOrderMinimalDto> activeOrders = pickingOrderService.findActivePickingOrders().stream()
                 .map(order -> new PickingOrderMinimalDto(order.getPickingOrderId(), order.getDescription(), order.getCreatedDateTime()))
-                .collect(Collectors.toList());
+                .toList();
         return ResponseEntity.ok(activeOrders);
     }
 }

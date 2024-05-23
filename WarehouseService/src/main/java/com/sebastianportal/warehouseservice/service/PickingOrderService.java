@@ -73,7 +73,8 @@ public class PickingOrderService {
             detail.setProduct(product);
             detail.setQuantity(detailDto.getQuantity());
             detail.setRemainingQuantity(detailDto.getQuantity());
-            detail.setPickedQuantity(0); // Initially set to 0
+            detail.setPickedQuantity(0);
+            detail.setReturnedQuantity(0);
             detail.setCreatedBy(user.getUsername());
             details.add(detail);
         }

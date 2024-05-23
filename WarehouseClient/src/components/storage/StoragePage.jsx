@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Typography, Container, Autocomplete, TextField, Modal, Box } from '@mui/material';
 import QrScanner from 'qr-scanner';
-import ApiService from '../service/ApiService';
+import ApiService from '../../service/ApiService';
 
 const StoragePage = () => {
   const { sourceLocationId, targetLocationId } = useParams();

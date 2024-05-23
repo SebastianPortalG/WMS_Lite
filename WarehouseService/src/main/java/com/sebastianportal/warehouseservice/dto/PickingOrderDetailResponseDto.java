@@ -12,4 +12,5 @@ public class PickingOrderDetailResponseDto {
     private Integer quantity;
     private Integer pickedQuantity;
     private Integer remainingQuantity;
+    private Integer returnedQuantity;
 }

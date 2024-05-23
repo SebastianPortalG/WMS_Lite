@@ -10,28 +10,27 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "PickingOrderDetail")
+@Table(name = "ComparacionInventario")
 @Getter
 @Setter
 @NoArgsConstructor
-public class PickingOrderDetail {
+public class InventoryComparison {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pickingOrderDetailId;
+    private Integer comparisonOpId;
 
     @ManyToOne
-    @JoinColumn(name = "pickingOrderId", nullable = false)
-    private PickingOrder pickingOrder;
+    @JoinColumn(name = "inventoryOpId", nullable = false)
+    private Inventory inventory;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "itemId", nullable = false)
-    private Product product;
+    @ManyToOne
+    @JoinColumn(name = "locationId", nullable = false)
+    private Location location;
 
-    private Integer quantity;
-    private Integer pickedQuantity;
-    private Integer remainingQuantity;
-    private Integer returnedQuantity;
+    private Integer comparedQuantity;
+    private boolean isOptional;
+
     @CreationTimestamp
     private LocalDateTime createdDateTime;
 

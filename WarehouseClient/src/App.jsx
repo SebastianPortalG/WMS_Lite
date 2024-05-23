@@ -11,8 +11,14 @@ import ReceptionPage from './components/ReceptionPage';
 import StartReceptionPage from './components/reception/StartReceptionPage';
 import StoreReceptionBatches from './components/reception/StoreReceptionBatches';
 import BatchStoragePage from './components/reception/BatchStoragePage';
-import BatchMovePage from './storage/BatchMovePage';
-import StoragePage from './storage/StoragePage';
+import BatchMovePage from './components/storage/BatchMovePage';
+import StoragePage from './components/storage/StoragePage';
+import DispatchPage from './components/DispatchPage';
+import StartDispatchPage from './components/dispatch/StartDispatchPage';
+import CreateDispatchMaster from './components/dispatch/CreateDispatchMaster';
+import DispatchDetailPage from './components/dispatch/DispatchDetailPage';
+import SelectBatchPage from './components/dispatch/SelectBatchPage'; 
+import ScanStoragePage from './components/dispatch/ScanStoragePage'; 
 import QRScanner from './components/common/QRScanner';
 import './index.css';
 
@@ -38,6 +44,13 @@ function App() {
           <Route path="/storage/:sourceLocationId" element={<StoragePage />} />
           <Route path="/storage/:sourceLocationId/:targetLocationId" element={<StoragePage />} />
           <Route path="/batch-move/:locationId" element={<BatchMovePage />} />
+          <Route path="/dispatch" element={<DispatchPage />} />
+          <Route path="/start-dispatch" element={<StartDispatchPage />} />
+          <Route path="/create-dispatch" element={<CreateDispatchMaster />} />
+          <Route path="/dispatch-storage/:dispatchMasterId/:pickingOrderId" element={<DispatchDetailPage />} /> 
+          <Route path="/select-batch/:dispatchMasterId/:pickingOrderId/:productId" element={<SelectBatchPage />} /> 
+          <Route path="/scan-storage/:dispatchMasterId/:pickingOrderId/:productId" element={<ScanStoragePage />} />
+          <Route path="/scan-storage/:dispatchMasterId/:pickingOrderId/:productId/:locationId" element={<ScanStoragePage />} />
         </Routes>
       </Router>
     </UserProvider>

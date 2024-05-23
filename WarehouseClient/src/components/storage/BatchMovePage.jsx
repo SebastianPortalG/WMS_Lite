@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Typography, Container, Autocomplete, TextField, Modal, Box } from '@mui/material';
 import QrScanner from 'qr-scanner';
-import ApiService from '../service/ApiService';
+import ApiService from '../../service/ApiService';
 
 const BatchMovePage = () => {
   const { locationId } = useParams();
@@ -115,10 +115,10 @@ const BatchMovePage = () => {
       >
         <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 400, bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
           <Typography id="modal-title" variant="h6" component="h2">
-            Confirm Move
+            Confirmar movimiento
           </Typography>
           <Typography id="modal-description" sx={{ mt: 2 }}>
-            Are you sure you want to move {quantity} units of {selectedBatch?.productName} to a new location?
+            ¿Está seguro que desea mover {quantity} unidades de {selectedBatch?.productName}?
           </Typography>
           <Button onClick={handleConfirmMove} sx={{ mr: 1 }}>Yes</Button>
           <Button onClick={() => setShowConfirmModal(false)}>No</Button>

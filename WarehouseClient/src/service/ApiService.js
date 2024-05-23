@@ -244,6 +244,18 @@ export const ApiService = {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
     ),
+  getDispatchMasterByPickingOrderId: (pickingOrderId) =>
+    handleApiCall(() =>
+        api.get(`/dispatches/by-picking-order/${pickingOrderId}`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
+    ),
+  getPickingOrderDetailsByDispatchMasterId: (dispatchMasterId) =>
+    handleApiCall(() =>
+        api.get(`/dispatches/${dispatchMasterId}/picking-order-details`, {
+            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
+    ),
   updateDispatchMaster: (dispatchMasterId, updateRequest) =>
     handleApiCall(() =>
       api.put(`/dispatches/update/${dispatchMasterId}`, updateRequest, {

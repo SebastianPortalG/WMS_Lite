@@ -3,6 +3,7 @@ package com.sebastianportal.warehouseservice.controller;
 import com.sebastianportal.warehouseservice.config.JwtTokenProvider;
 import com.sebastianportal.warehouseservice.dto.BasicCreationResponseDto;
 import com.sebastianportal.warehouseservice.dto.DispatchEndDto;
+import com.sebastianportal.warehouseservice.dto.PickingOrderDetailResponseDto;
 import com.sebastianportal.warehouseservice.dto.StorageDto;
 import com.sebastianportal.warehouseservice.model.DispatchMaster;
 import com.sebastianportal.warehouseservice.model.User;
@@ -10,6 +11,7 @@ import com.sebastianportal.warehouseservice.service.DispatchService;
 import com.sebastianportal.warehouseservice.service.PickingOrderService;
 import com.sebastianportal.warehouseservice.service.StorageService;
 import com.sebastianportal.warehouseservice.service.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -101,12 +103,34 @@ public class DispatchController {
                 return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
             }
 
-            DispatchMaster updatedDispatchMaster = dispatchService.endDispatch(dispatchMasterId, updateRequest);
+            DispatchMaster updatedDispatchMaster = dispatchService.endDispatch(dispatchMasterId, updateRequest, user);
             return new ResponseEntity<>(updatedDispatchMaster, HttpStatus.OK);
         } catch (UsernameNotFoundException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>("Error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/by-picking-order/{pickingOrderId}")
+    public ResponseEntity<?> getDispatchMasterByPickingOrderId(@PathVariable Integer pickingOrderId) {
+        try {
+            DispatchMaster dispatchMaster = dispatchService.findDispatchMasterByPickingOrderId(pickingOrderId);
+            return ResponseEntity.ok(dispatchMaster.getDispatchMasterId());
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+    @GetMapping("/{dispatchMasterId}/picking-order-details")
+    public ResponseEntity<?> getPickingOrderDetailsByDispatchMasterId(@PathVariable Integer dispatchMasterId) {
+        try {
+            List<PickingOrderDetailResponseDto> details = dispatchService.getPickingOrderDetailsByDispatchMasterId(dispatchMasterId);
+            return ResponseEntity.ok(details);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }

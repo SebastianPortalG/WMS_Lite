@@ -26,11 +26,11 @@ public class Product {
     @Column(length = 500)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoryId", nullable = false)
     private ProductCategory category;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rotationId", nullable = false)
     private Rotation rotation;
 
