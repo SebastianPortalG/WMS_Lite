@@ -1,6 +1,7 @@
 package com.sebastianportal.warehouseservice.controller;
 
 import com.sebastianportal.warehouseservice.config.JwtTokenProvider;
+import com.sebastianportal.warehouseservice.dto.ProductDto;
 import com.sebastianportal.warehouseservice.exception.ProductLimitException;
 import com.sebastianportal.warehouseservice.exception.ProductNotFoundException;
 import com.sebastianportal.warehouseservice.model.Product;
@@ -85,6 +86,15 @@ public class ProductController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         } catch (Exception e) {
             return new ResponseEntity<>("An error occurred during the deletion process", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/{productId}")
+    public ResponseEntity<?> getProductById(@PathVariable int productId) throws ProductNotFoundException {
+        Product product = productService.findProductById(productId);
+        if (product != null) {
+            return ResponseEntity.ok(product);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }

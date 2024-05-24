@@ -66,7 +66,11 @@ function LoginPage() {
       navigate('/dashboard');
     } catch (error) {
       console.error('Login failed:', error);
-      toast.error(error.response?.data?.message || "Login failed");
+      const errorMessage = error.response?.data?.message || "Login failed";
+      toast.error("Las credenciales no son correctas");
+      if (errorMessage.toLowerCase().includes('credentials')) {
+        toast.error("Las credenciales no son correctas");
+      }
     }
   };
 

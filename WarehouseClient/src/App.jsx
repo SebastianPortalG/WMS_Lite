@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { UserProvider } from './components/UserContext'; 
 import NavBar from './components/common/NavBar'; 
 import LandingPage from './components/LandingPage';
@@ -19,6 +21,13 @@ import CreateDispatchMaster from './components/dispatch/CreateDispatchMaster';
 import DispatchDetailPage from './components/dispatch/DispatchDetailPage';
 import SelectBatchPage from './components/dispatch/SelectBatchPage'; 
 import ScanStoragePage from './components/dispatch/ScanStoragePage'; 
+import InventoryPage from './components/InventoryPage';
+import StartInventoryScanning from './components/inventory/StartInventoryScanning.jsx';
+import StartInventoryScanningPage from './components/inventory/StartInventoryScanningPage';
+import InventoryScanPage from './components/inventory/InventoryScanPage';
+import StorageTablePage from './components/StorageTablePage';
+import ProductKardexTablePage from './components/kardex/ProductKardexTablePage';
+import GeneralKardexTablePage from './components/kardex/GeneralKardexTablePage';
 import QRScanner from './components/common/QRScanner';
 import './index.css';
 
@@ -51,9 +60,17 @@ function App() {
           <Route path="/select-batch/:dispatchMasterId/:pickingOrderId/:productId" element={<SelectBatchPage />} /> 
           <Route path="/scan-storage/:dispatchMasterId/:pickingOrderId/:productId" element={<ScanStoragePage />} />
           <Route path="/scan-storage/:dispatchMasterId/:pickingOrderId/:productId/:locationId" element={<ScanStoragePage />} />
+          <Route path="/inventory" element={<InventoryPage />}/>
+          <Route path="/inventory-scan" element={<StartInventoryScanning />}/>
+          <Route path="/inventory-scan/:inventoryMasterId" element={<StartInventoryScanningPage />}/>
+          <Route path="/inventory-scan/:inventoryMasterId/:locationId" element={<InventoryScanPage />}/>
+          <Route path="/storage-list/:page/:size" element={<StorageTablePage />}/>
+          <Route path="/kardex/product/:productId" element={<ProductKardexTablePage />} />
+          <Route path="/kardex/general" element={<GeneralKardexTablePage />} />
         </Routes>
       </Router>
-    </UserProvider>
+      <ToastContainer />
+    </UserProvider> 
   );
 }
 

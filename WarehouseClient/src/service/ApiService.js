@@ -18,14 +18,22 @@ api.interceptors.request.use((config) => {
   }
   return config;
 }, (error) => {
-  toast.error(error.response?.data?.message || "An unexpected error occurred")
+  toast.error(error.response?.data?.message || "An unexpected error occurred");
   return Promise.reject(error);
 });
 
 api.interceptors.response.use(
   response => response,
   error => {
-    toast.error(error.response?.data?.message || "An unexpected error occurred");
+    if (error.response) {
+      if (error.response.status === 404 && !error.response.data?.message) {
+        toast.error("No se encontró");
+      } else {
+        toast.error(error.response.data?.message || "An unexpected error occurred");
+      }
+    } else {
+      toast.error("An unexpected error occurred");
+    }
     return Promise.reject(error);
   }
 );
@@ -64,6 +72,14 @@ export const ApiService = {
           sort,
           sortDirection
         },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+      })
+    ),
+  getProductById: (productId) =>
+    handleApiCall(() =>
+      api.get(`/products/${productId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         },
@@ -227,7 +243,21 @@ export const ApiService = {
       }
     })
   ),
-
+  fetchStorages: ({ code, product, status, classification, orderByExpiryDate }) =>
+  handleApiCall(() =>
+    api.get('/storage', {
+      params: {
+        code,
+        product,
+        status,
+        classification,
+        orderByExpiryDate
+      },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+    })
+  ),
   moveBatch: (batchId, sourceLocationId, targetLocationId, quantity) =>
   handleApiCall(() =>
     api.post(`/batches/move?batchId=${batchId}&sourceLocationId=${sourceLocationId}&targetLocationId=${targetLocationId}&quantity=${quantity}`, {}, {
@@ -306,6 +336,69 @@ export const ApiService = {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })
   ),
+  // Inventory
+    createInventoryMaster: (inventoryMaster) =>
+    handleApiCall(() =>
+      api.post('/inventory/inventoryMaster', inventoryMaster, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
+    ),
+
+  createInventory: (inventory) =>
+    handleApiCall(() =>
+      api.post('/inventory/createInventory', inventory, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
+    ),
+    fetchInventoryMasters: (processFinished) =>
+    handleApiCall(() =>
+      api.get('/inventory/inventoryMasters/active', {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+    getInventoryMasterById: (inventoryMasterId) =>
+    handleApiCall(() =>
+      api.get(`/inventory/inventoryMasters/${inventoryMasterId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+
+  updateInventoryMaster: (inventoryMasterId, updateRequest) =>
+    handleApiCall(() =>
+      api.put(`/inventory/inventoryMasters/${inventoryMasterId}`, updateRequest, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+
+     // Notifications
+  fetchNotifications: () => handleApiCall(() =>
+  api.get('/notifications', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+),
+fetchReadNotifications: () => handleApiCall(() =>
+  api.get('/notifications/read', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+),
+
+markNotificationAsRead: (notificationId) => handleApiCall(() =>
+  api.put(`/notifications/${notificationId}/read`, {}, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+),
+  // Kardex
+  fetchKardexByProductId: (productId) =>
+    handleApiCall(() => api.get(`/storage/kardex/${productId}`)),
+
+  fetchKardexForWarehouse: () =>
+    handleApiCall(() => api.get(`/storage/kardex`)),
 };
 
 export default ApiService;

@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface ReceptionMasterRepository extends JpaRepository<ReceptionMaster, Integer> {
     List<ReceptionMaster> findByProcessFinished(boolean processFinished);
+    List<ReceptionMaster> findByBatches_BatchIdIn(List<Integer> batchIds);
 
 }

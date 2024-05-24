@@ -16,5 +16,6 @@ public interface BatchRepository extends JpaRepository<Batch, Integer> {
     Optional<Batch> findTopByItemAndItemExpiresIsFalse(Product product);
     List<Batch> findByReceptionMaster_ReceptionMasterIdAndAvailableQuantityGreaterThan(Integer receptionMasterId, int quantity);
     List<Batch> findByAvailableQuantityGreaterThan(int quantity);
+    List<Batch> findByItem_ProductId(int productId);
 
 }

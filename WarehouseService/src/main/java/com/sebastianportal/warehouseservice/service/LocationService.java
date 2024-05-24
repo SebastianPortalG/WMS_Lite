@@ -46,8 +46,8 @@ public class LocationService {
                 .orElseThrow(() -> new LocationNotFoundException("Location not found with id: " + id));
         location.setModifiedBy(username);
         location.setModifiedDateTime(LocalDateTime.now());
-        // Implement deletion logic, e.g., marking as deleted if using soft deletes
-        locationRepository.save(location);
+
+        locationRepository.delete(location);
     }
     public Optional<Location> getLocationById(Integer id) {
         return locationRepository.findById(id);

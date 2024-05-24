@@ -75,11 +75,21 @@ const BatchMovePage = () => {
     setShowConfirmModal(false);
   };
 
+  const handleQuantityChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    if (value >= 0 && (!selectedBatch || value <= selectedBatch.availableQuantity)|| value ==null) {
+      setQuantity(value.toString());
+    } else if (value < 1) {
+      setQuantity('1');
+    } else if (selectedBatch && value > selectedBatch.availableQuantity) {
+      setQuantity(selectedBatch.availableQuantity.toString());
+    }
+  };
   return (
     <Container>
       {!location && (
         <>
-          <Typography variant="h5">Scan Location QR Code</Typography>
+          <Typography variant="h5">Escanee el Código de la Ubicación</Typography>
           <Button variant="contained" onClick={startScanning} disabled={isScanning}>
             Start Scanning
           </Button>

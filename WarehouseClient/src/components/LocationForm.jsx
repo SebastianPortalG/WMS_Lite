@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button } from '@mui/material';
+import ApiService from '../service/ApiService';
+
 
 const LocationForm = ({ open, onClose, onSave, initialData }) => {
     const [formData, setFormData] = useState({
@@ -86,8 +88,8 @@ const LocationForm = ({ open, onClose, onSave, initialData }) => {
                 />
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose}>Cancel</Button>
-                <Button onClick={handleSubmit} color="primary">Save</Button>
+                <Button onClick={onClose}>Cancelar</Button>
+                <Button onClick={handleSubmit} color="primary">Registrar</Button>
             </DialogActions>
         </Dialog>
     );

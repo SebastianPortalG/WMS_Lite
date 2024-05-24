@@ -87,7 +87,7 @@ const BatchStoragePage = () => {
 
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value, 10);
-    if (value > 0 && (!selectedBatch || value <= selectedBatch.availableQuantity)) {
+    if (value >= 0 && (!selectedBatch || value <= selectedBatch.availableQuantity)|| value ==null) {
       setQuantity(value.toString());
     } else if (value < 1) {
       setQuantity('1');

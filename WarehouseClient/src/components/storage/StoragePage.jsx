@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Typography, Container, Autocomplete, TextField, Modal, Box } from '@mui/material';
 import QrScanner from 'qr-scanner';
 import ApiService from '../../service/ApiService';
+import { toast } from 'react-toastify';
 
 const StoragePage = () => {
   const { sourceLocationId, targetLocationId } = useParams();
@@ -116,12 +117,12 @@ const StoragePage = () => {
     if (quantity > 0 && selectedBatch && targetLocation) {
       const { error } = await ApiService.moveBatch(selectedBatch.batchId, sourceLocationId, targetLocation.locationId, quantity);
       if (!error) {
-        alert("Batch moved successfully!");
+        toast("Batch moved successfully!");
         setLocation(null);
         setTargetLocation(null);
         setSelectedBatch(null);
         setQuantity('');
-        navigate(`/storage`);
+        navigate(`/dashboard`);
       } else {
         console.error("Move failed:", error);
       }
@@ -135,7 +136,7 @@ const StoragePage = () => {
         <>
           <Typography variant="h5">Escanee el QR donde se encuentra el producto</Typography>
           <Button variant="contained" onClick={() => {console.log("caso 2"); setIsScanningTarget(false); startScanningSource(); }} disabled={isScanning}>
-            Scan Source
+            Escanear
           </Button>
           <video ref={videoRef} style={{ width: '100%' }} />
         </>

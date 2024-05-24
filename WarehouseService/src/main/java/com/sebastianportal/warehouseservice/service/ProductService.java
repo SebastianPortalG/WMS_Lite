@@ -1,5 +1,6 @@
 package com.sebastianportal.warehouseservice.service;
 
+import com.sebastianportal.warehouseservice.dto.ProductDto;
 import com.sebastianportal.warehouseservice.exception.ProductLimitException;
 import com.sebastianportal.warehouseservice.exception.ProductNotFoundException;
 import com.sebastianportal.warehouseservice.model.Product;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -23,10 +25,11 @@ public class ProductService {
 
     @Autowired
     private ProductCategoryService productCategoryService;
+
     @Transactional
     public Product createProduct(Product product) throws ProductLimitException {
         if (productRepository.countActiveProducts() >= 300) {
-            throw new ProductLimitException("Maximum product limit reached.");
+            throw new ProductLimitException("Límite alcanzado.");
         }
 
         ProductCategory category = productCategoryService.findOrCreateCategory(product.getCategory());
@@ -61,7 +64,7 @@ public class ProductService {
     public void deleteProduct(Integer id, String username) throws ProductNotFoundException {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
-        product.setDeleted(true);
+        product.setActive(false);
         product.setModifiedBy(username);
         productRepository.save(product);
     }
@@ -79,5 +82,6 @@ public class ProductService {
         return productRepository.findById(productId)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + productId));
     }
+
 
 }

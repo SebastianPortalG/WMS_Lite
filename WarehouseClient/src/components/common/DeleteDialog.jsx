@@ -4,7 +4,7 @@ import { Dialog, DialogActions, DialogTitle, DialogContent, DialogContentText, B
 
 
 const DeleteDialog = ({ open, onClose, onConfirm, item }) => {
-    const confirmMessage = item.name ? `¿Está seguro que desea eliminar: ${item.name}?` : '¿Está seguro que desea eliminar esta ubicación?';
+    const confirmMessage = item.name ? `¿Está seguro que desea volver inactivo: ${item.name}?` : '¿Está seguro que desea eliminar esta ubicación?';
     return(
     <Dialog open={open} onClose={onClose}>
         <DialogTitle>Confirmación</DialogTitle>

@@ -33,7 +33,7 @@ const StoreReceptionBatches = () => {
 
     return (
         <Container>
-            <Typography variant="h6">Store Reception Batches</Typography>
+            <Typography variant="h6">Escoja el proceso</Typography>
             <Autocomplete
                 options={receptions}
                 getOptionLabel={(option) => `Id de recepcion: ${option.id}, Fecha: ${option.receptionDate}`}

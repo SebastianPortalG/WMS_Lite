@@ -133,8 +133,8 @@ function ProductForm({ open, onClose, onSave, product }) {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} >Cancel</Button>
-        <Button onClick={handleSubmit} color="primary">Save</Button>
+        <Button onClick={onClose} >Cancelar</Button>
+        <Button onClick={handleSubmit} color="primary">Registrar</Button>
       </DialogActions>
     </Dialog>
   );

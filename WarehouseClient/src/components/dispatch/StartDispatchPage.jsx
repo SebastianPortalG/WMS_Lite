@@ -51,14 +51,14 @@ const StartDispatchPage = () => {
       if (pickingOrderDetails.length > 0) {
         const lastDetail = pickingOrderDetails[pickingOrderDetails.length - 1];
         if (!lastDetail.quantity) {
-          showSnackbar("Please complete the details of the current picking order detail before adding another.", "warning");
+          showSnackbar("Completar los detalles antes de continuar.", "warning");
           return;
         }
         const duplicate = pickingOrderDetails.slice(0, -1).some(detail =>
           detail.product.productId === lastDetail.product.productId
         );
         if (duplicate) {
-          showSnackbar("A picking order detail with the same product already exists.", "error");
+          showSnackbar("Ya existe el mismo detalle en esta orden.", "error");
           return;
         }
       }

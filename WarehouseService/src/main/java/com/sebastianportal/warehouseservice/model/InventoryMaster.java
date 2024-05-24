@@ -28,6 +28,7 @@ public class InventoryMaster {
     private String description;
 
     private LocalDateTime inventoryDate;
+    private boolean inventoryFinished;
 
     @CreationTimestamp
     private LocalDateTime createdDateTime;
