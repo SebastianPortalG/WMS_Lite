@@ -61,7 +61,7 @@ public class ProductService {
     public void deleteProduct(Integer id, String username) throws ProductNotFoundException {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException("Product not found with id: " + id));
-        product.setDeleted(true);
+        product.setActive(false);
         product.setModifiedBy(username);
         productRepository.save(product);
     }

@@ -19,6 +19,10 @@ import CreateDispatchMaster from './components/dispatch/CreateDispatchMaster';
 import DispatchDetailPage from './components/dispatch/DispatchDetailPage';
 import SelectBatchPage from './components/dispatch/SelectBatchPage'; 
 import ScanStoragePage from './components/dispatch/ScanStoragePage'; 
+import InventoryPage from './components/InventoryPage';
+import StartInventoryScanning from './components/inventory/StartInventoryScanning.jsx';
+import StartInventoryScanningPage from './components/inventory/StartInventoryScanningPage';
+import InventoryScanPage from './components/inventory/InventoryScanPage';
 import QRScanner from './components/common/QRScanner';
 import './index.css';
 
@@ -51,6 +55,10 @@ function App() {
           <Route path="/select-batch/:dispatchMasterId/:pickingOrderId/:productId" element={<SelectBatchPage />} /> 
           <Route path="/scan-storage/:dispatchMasterId/:pickingOrderId/:productId" element={<ScanStoragePage />} />
           <Route path="/scan-storage/:dispatchMasterId/:pickingOrderId/:productId/:locationId" element={<ScanStoragePage />} />
+          <Route path="/inventory" element={<InventoryPage />}/>
+          <Route path="/inventory-scan" element={<StartInventoryScanning />}/>
+          <Route path="/inventory-scan/:inventoryMasterId" element={<StartInventoryScanningPage />}/>
+          <Route path="/inventory-scan/:inventoryMasterId/:locationId" element={<InventoryScanPage />}/>
         </Routes>
       </Router>
     </UserProvider>

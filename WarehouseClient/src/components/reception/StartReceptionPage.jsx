@@ -50,7 +50,7 @@ const StartReceptionPage = () => {
       if (batches.length > 0) {
         const lastBatch = batches[batches.length - 1];
         if (!lastBatch.quantity || !lastBatch.expiryDate) {
-          showSnackbar("Please complete the details of the current batch before adding another.", "warning");
+          showSnackbar("Termine con el lote actual antes de añadir otro.", "warning");
           return;
         }
         const duplicate = batches.slice(0, -1).some(batch =>
@@ -58,7 +58,7 @@ const StartReceptionPage = () => {
           batch.expiryDate === lastBatch.expiryDate
         );
         if (duplicate) {
-          showSnackbar("A batch with the same product and expiry date already exists.", "error");
+          showSnackbar("Lote duplicado.", "error");
           return;
         }
       }
@@ -82,7 +82,7 @@ const StartReceptionPage = () => {
     if (batches.length > 0) {
         const lastBatch = batches[batches.length - 1];
         if (!lastBatch.quantity || !lastBatch.expiryDate) {
-            showSnackbar("Please complete the details of the current batch before saving.", "warning");
+            showSnackbar("Complete los detalles para poder guardar.", "warning");
             return;
         }
         const duplicate = batches.slice(0, -1).some(batch =>
@@ -90,7 +90,7 @@ const StartReceptionPage = () => {
             batch.expiryDate === lastBatch.expiryDate
         );
         if (duplicate) {
-            showSnackbar("A batch with the same product and expiry date already exists.", "error");
+            showSnackbar("Lote duplicado.", "error");
             return;
         }
     }
@@ -99,7 +99,7 @@ const StartReceptionPage = () => {
     if (batches.length > 0) {
         setShowConfirmModal(true);
     } else {
-        showSnackbar("No batches to save.", "warning");
+        showSnackbar("No existen lotes para guardar.", "warning");
     }
 };
 
@@ -116,11 +116,11 @@ const StartReceptionPage = () => {
         navigate('/reception');
       } else {
         console.error("Failed to save reception with response:", response);
-        showSnackbar("Failed to save reception due to server error.", "error");
+        showSnackbar("Error.", "error");
       }
     } catch (error) {
       console.error("Error saving reception:", error);
-      showSnackbar("Failed to save reception due to server error.", "error");
+      showSnackbar("Error.", "error");
     }
   };
 

@@ -29,10 +29,11 @@ public class Inventory {
     @JoinColumn(name = "itemId", nullable = false)
     private Product product;
 
+    @ManyToOne
+    @JoinColumn(name = "locationId", nullable = false)
+    private Location location;
+
     private Integer quantity;
-    private Integer comparedQuantity;
-    private Integer difference;
-    private boolean compared;
 
     @CreationTimestamp
     private LocalDateTime createdDateTime;

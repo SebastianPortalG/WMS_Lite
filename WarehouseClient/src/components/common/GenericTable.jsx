@@ -1,7 +1,7 @@
 // GenericTable.jsx
 import * as React from 'react';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import DeleteIcon from '@mui/icons-material/Delete';
+import HideSourceIcon from '@mui/icons-material/HideSource';
 import EditIcon from '@mui/icons-material/Edit';
 
 
@@ -23,8 +23,8 @@ const GenericTable = ({ columns, rows, loading, onPaginationModelChange, rowCoun
         }}
       />,
       <GridActionsCellItem
-        icon={<DeleteIcon />}
-        label="Delete"
+        icon={<HideSourceIcon />}
+        label="Make inactive"
         onClick={() => onDelete(params.row)}
       />,
     ]

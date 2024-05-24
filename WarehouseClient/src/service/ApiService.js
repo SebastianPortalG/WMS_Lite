@@ -306,6 +306,39 @@ export const ApiService = {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     })
   ),
+  // Inventory
+    createInventoryMaster: (inventoryMaster) =>
+    handleApiCall(() =>
+      api.post('/inventory/inventoryMaster', inventoryMaster, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
+    ),
+
+  createInventory: (inventory) =>
+    handleApiCall(() =>
+      api.post('/inventory/createInventory', inventory, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
+    ),
+    fetchInventoryMasters: (processFinished) =>
+    handleApiCall(() =>
+      api.get('/inventory/inventoryMasters/active', {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+    getInventoryMasterById: (inventoryMasterId) =>
+    handleApiCall(() =>
+      api.get(`/inventory/inventoryMasters/${inventoryMasterId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+
+  updateInventoryMaster: (inventoryMasterId, updateRequest) =>
+    handleApiCall(() =>
+      api.put(`/inventory/inventoryMasters/${inventoryMasterId}`, updateRequest, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
 };
 
 export default ApiService;
