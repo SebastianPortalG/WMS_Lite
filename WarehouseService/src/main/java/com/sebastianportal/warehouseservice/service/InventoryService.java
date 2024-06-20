@@ -18,6 +18,24 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+import com.sebastianportal.warehouseservice.dto.BasicCreationResponseDto;
+import com.sebastianportal.warehouseservice.dto.InventoryMasterRequest;
+import com.sebastianportal.warehouseservice.dto.InventoryMasterRequestEnd;
+import com.sebastianportal.warehouseservice.dto.InventoryRequest;
+import com.sebastianportal.warehouseservice.model.*;
+import com.sebastianportal.warehouseservice.repository.InventoryMasterRepository;
+import com.sebastianportal.warehouseservice.repository.InventoryRepository;
+import com.sebastianportal.warehouseservice.repository.LocationRepository;
+import com.sebastianportal.warehouseservice.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@Service
 public class InventoryService {
     @Autowired
     private InventoryMasterRepository inventoryMasterRepository;
