@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "ComparacionInventario")
@@ -28,6 +29,10 @@ public class InventoryComparison {
     @JoinColumn(name = "locationId", nullable = false)
     private Location location;
 
+    @OneToMany
+    @JoinColumn(name = "comparisonOpId")
+    private List<Storage> storages;
+
     private Integer comparedQuantity;
     private boolean isOptional;
 
@@ -39,4 +44,7 @@ public class InventoryComparison {
 
     private String createdBy;
     private String modifiedBy;
+    public Product getProduct() {
+        return inventory != null ? inventory.getProduct() : null;
+    }
 }

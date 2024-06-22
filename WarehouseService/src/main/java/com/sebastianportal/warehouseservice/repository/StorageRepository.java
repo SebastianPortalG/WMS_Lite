@@ -32,6 +32,8 @@ public interface StorageRepository extends JpaRepository<Storage, Integer> {
 
     @Query("SELECT s FROM Storage s WHERE s.location = :location AND s.batch.item = :product")
     Optional<Storage> findByLocationAndProduct(@Param("location") Location location, @Param("product") Product product);
+    @Query("SELECT s FROM Storage s WHERE s.batch.item.productId = :productId AND s.location.locationId = :locationId")
+    List<Storage> findByProductIdAndLocationId(@Param("productId") Integer productId, @Param("locationId") Integer locationId);
     @Query("SELECT s FROM Storage s WHERE s.location.locationId = :locationId AND s.batch.item.productId = :productId ORDER BY s.batch.expiryDate ASC")
     List<Storage> findByLocation_LocationIdAndProduct_ProductIdOrderByBatch_ExpiryDate(@Param("locationId") Integer locationId, @Param("productId") Integer productId);
 }

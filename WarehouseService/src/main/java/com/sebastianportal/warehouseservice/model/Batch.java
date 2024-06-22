@@ -1,5 +1,6 @@
 package com.sebastianportal.warehouseservice.model;
 
+import com.sebastianportal.warehouseservice.dto.SimpleBatchResponseDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -69,5 +70,14 @@ public class Batch {
         String receptionPart = this.receptionMaster.getReceptionDate().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         this.code = categoryPart + "-" + namePart + "-" + expiryPart + "-" + receptionPart;
+    }
+    public SimpleBatchResponseDto toSimpleBatchResponseDto() {
+        return new SimpleBatchResponseDto(
+                this.batchId,
+                this.code,
+                this.item.getName(),
+                this.availableQuantity,
+                this.expiryDate
+        );
     }
 }

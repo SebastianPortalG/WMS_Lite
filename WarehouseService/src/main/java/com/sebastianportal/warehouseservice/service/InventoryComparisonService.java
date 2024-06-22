@@ -2,6 +2,7 @@ package com.sebastianportal.warehouseservice.service;
 
 
 import com.sebastianportal.warehouseservice.dto.InventoryComparisonDto;
+import com.sebastianportal.warehouseservice.dto.StorageDto;
 import com.sebastianportal.warehouseservice.model.*;
 import com.sebastianportal.warehouseservice.repository.*;
 import jakarta.persistence.EntityNotFoundException;
@@ -35,27 +36,20 @@ public class InventoryComparisonService {
                 .orElseThrow(() -> new EntityNotFoundException("Inventory not found"));
         List<InventoryComparisonDto> comparisonList = new ArrayList<>();
 
-        // Get all inventories related to the inventory master
+        // Get all products and locations from the inventory
         List<Inventory> inventories = inventoryRepository.findByInventoryMaster_InventoryMasterId(inventoryMaster.getInventoryMasterId());
 
-        // Create sets to store the unique products and locations in the inventory
         Set<Product> productsInInventory = inventories.stream().map(Inventory::getProduct).collect(Collectors.toSet());
         Set<Location> locationsInInventory = inventories.stream().map(Inventory::getLocation).collect(Collectors.toSet());
-
         Set<String> existingComparisons = new HashSet<>();
-
-        // First pass: Compare each inventory line with the current storage
+        // Compare for each inventory line
         for (Inventory inventory : inventories) {
             Product product = inventory.getProduct();
             Location location = inventory.getLocation();
 
-            // Fetch storages for the product
             List<Storage> storages = storageRepository.findByProductIdOrderByExpiryDate(product.getProductId());
-
-            // Create a map for quick look-up of storage quantities by location
             Map<Location, Integer> storageMap = storages.stream().collect(Collectors.toMap(Storage::getLocation, Storage::getStoredQuantity));
 
-            // Create comparison DTO
             InventoryComparisonDto comparisonDto = new InventoryComparisonDto();
             comparisonDto.setProductCode(product.generateCode());
             comparisonDto.setLocation(location.generateStringName());
@@ -63,45 +57,39 @@ public class InventoryComparisonService {
             comparisonDto.setStorageQuantity(storageMap.getOrDefault(location, 0));
             comparisonDto.setDifference(comparisonDto.getInventoryQuantity() - comparisonDto.getStorageQuantity());
             comparisonDto.setInventoryOpId(inventory.getInventoryOpId());
-            // Add comparison to the list if not already present
             String key = comparisonDto.getProductCode() + comparisonDto.getLocation();
             if (!existingComparisons.contains(key)) {
                 comparisonList.add(comparisonDto);
                 existingComparisons.add(key);
+                storageMap.remove(location);
+                InventoryComparison comparison = new InventoryComparison();
+                comparison.setInventory(inventory);
+                comparison.setLocation(location);
+                comparison.setComparedQuantity(comparisonDto.getStorageQuantity());
+                comparison.setOptional(false);
+                comparison.setCreatedBy(username);
+                comparison.setModifiedBy(username);
+                inventoryComparisonRepository.save(comparison);
             }
 
-            // Save comparison
-            InventoryComparison comparison = new InventoryComparison();
-            comparison.setInventory(inventory);
-            comparison.setLocation(location);
-            comparison.setComparedQuantity(comparisonDto.getStorageQuantity());
-            comparison.setOptional(false);
-            comparison.setCreatedBy(username);
-            comparison.setModifiedBy(username);
-            inventoryComparisonRepository.save(comparison);
         }
 
-        // Second pass: Handle locations not present in the inventory
-        for (Location location : locationsInInventory) {
-            List<Storage> storages = storageRepository.findByLocation_LocationId_OrderByBatch_ExpiryDate(location.getLocationId());
+        // Compare for each product in inventory across all locations
+        for (Product product : productsInInventory) {
+            List<Storage> storages = storageRepository.findByProductIdOrderByExpiryDate(product.getProductId());
 
             for (Storage storage : storages) {
-                Product product = storage.getBatch().getItem();
-
-                // If this product-location pair was not in the inventory, create a comparison entry
+                Location location = storage.getLocation();
                 String key = product.generateCode() + location.generateStringName();
                 if (!existingComparisons.contains(key)) {
                     InventoryComparisonDto comparisonDto = new InventoryComparisonDto();
                     comparisonDto.setProductCode(product.generateCode());
-                    comparisonDto.setLocation(location.generateStringName());
-                    comparisonDto.setInventoryQuantity(0); // No inventory line means quantity is 0
+                    comparisonDto.setLocation(storage.getLocation().generateStringName());
+                    comparisonDto.setInventoryQuantity(0);
                     comparisonDto.setStorageQuantity(storage.getStoredQuantity());
                     comparisonDto.setDifference(comparisonDto.getInventoryQuantity() - comparisonDto.getStorageQuantity());
-
                     comparisonList.add(comparisonDto);
                     existingComparisons.add(key);
-
-                    // Save comparison
                     InventoryComparison comparison = new InventoryComparison();
                     comparison.setInventory(null); // No corresponding inventory line
                     comparison.setLocation(location);
@@ -113,26 +101,25 @@ public class InventoryComparisonService {
                 }
             }
         }
-        for (Product product : productsInInventory) {
-            List<Storage> storages = storageRepository.findByProductIdOrderByExpiryDate(product.getProductId());
+
+        // Compare for each location in inventory across all products
+        for (Location location : locationsInInventory) {
+            List<Storage> storages = storageRepository.findByLocation_LocationId_OrderByBatch_ExpiryDate(location.getLocationId());
 
             for (Storage storage : storages) {
-                Location location = storage.getLocation();
+                Product product = storage.getBatch().getItem();
 
                 // If this product-location pair was not in the inventory, create a comparison entry
                 String key = product.generateCode() + location.generateStringName();
                 if (!existingComparisons.contains(key)) {
                     InventoryComparisonDto comparisonDto = new InventoryComparisonDto();
-                    comparisonDto.setProductCode(product.generateCode());
+                    comparisonDto.setProductCode(storage.getBatch().getItem().generateCode());
                     comparisonDto.setLocation(location.generateStringName());
-                    comparisonDto.setInventoryQuantity(0); // No inventory line means quantity is 0
+                    comparisonDto.setInventoryQuantity(0);
                     comparisonDto.setStorageQuantity(storage.getStoredQuantity());
                     comparisonDto.setDifference(comparisonDto.getInventoryQuantity() - comparisonDto.getStorageQuantity());
-
                     comparisonList.add(comparisonDto);
                     existingComparisons.add(key);
-
-                    // Save comparison
                     InventoryComparison comparison = new InventoryComparison();
                     comparison.setInventory(null); // No corresponding inventory line
                     comparison.setLocation(location);
@@ -147,5 +134,4 @@ public class InventoryComparisonService {
 
         return comparisonList;
     }
-
 }

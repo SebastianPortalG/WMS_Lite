@@ -26,6 +26,9 @@ public class Adjustment {
 
     private boolean approvalStatus;
 
+    private String reason;
+    private String comment;
+
     @CreationTimestamp
     private LocalDateTime createdDateTime;
 
