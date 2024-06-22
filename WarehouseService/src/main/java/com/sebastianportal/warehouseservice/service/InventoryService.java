@@ -83,6 +83,9 @@ public class InventoryService {
     public List<InventoryMaster> getActiveInventoryMasters() {
         return inventoryMasterRepository.findByInventoryFinished(false);
     }
+    public List<InventoryMaster> getActiveInventoryMastersFinished() {
+        return inventoryMasterRepository.findByInventoryFinished(true);
+    }
     public InventoryMaster updateInventoryMaster(int inventoryMasterId, InventoryMasterRequestEnd updateRequest) {
         StringBuilder sb = new StringBuilder();
         InventoryMaster inventoryMaster = inventoryMasterRepository.findById(inventoryMasterId)

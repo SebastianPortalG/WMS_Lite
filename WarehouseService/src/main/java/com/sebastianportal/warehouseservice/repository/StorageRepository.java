@@ -1,5 +1,7 @@
 package com.sebastianportal.warehouseservice.repository;
 
+import com.sebastianportal.warehouseservice.model.Location;
+import com.sebastianportal.warehouseservice.model.Product;
 import com.sebastianportal.warehouseservice.model.Storage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -28,6 +30,8 @@ public interface StorageRepository extends JpaRepository<Storage, Integer> {
                                  @Param("classification") String classification,
                                  @Param("orderByExpiryDate") boolean orderByExpiryDate);
 
-
-
+    @Query("SELECT s FROM Storage s WHERE s.location = :location AND s.batch.item = :product")
+    Optional<Storage> findByLocationAndProduct(@Param("location") Location location, @Param("product") Product product);
+    @Query("SELECT s FROM Storage s WHERE s.location.locationId = :locationId AND s.batch.item.productId = :productId ORDER BY s.batch.expiryDate ASC")
+    List<Storage> findByLocation_LocationIdAndProduct_ProductIdOrderByBatch_ExpiryDate(@Param("locationId") Integer locationId, @Param("productId") Integer productId);
 }

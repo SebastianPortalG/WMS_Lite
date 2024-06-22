@@ -356,6 +356,12 @@ export const ApiService = {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
     ),
+    fetchFinishedInventoryMasters: (processFinished) =>
+    handleApiCall(() =>
+      api.get('/inventory/inventoryMasters/finished', {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
     getInventoryMasterById: (inventoryMasterId) =>
     handleApiCall(() =>
       api.get(`/inventory/inventoryMasters/${inventoryMasterId}`, {
@@ -367,6 +373,15 @@ export const ApiService = {
     handleApiCall(() =>
       api.put(`/inventory/inventoryMasters/${inventoryMasterId}`, updateRequest, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      })
+    ),
+
+    compareInventory: (inventoryMasterId) =>
+    handleApiCall(() =>
+      api.get(`/inventory-comparison/compare/${inventoryMasterId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
       })
     ),
 

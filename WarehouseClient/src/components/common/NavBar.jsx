@@ -82,7 +82,8 @@ const NavBar = () => {
   const menuItems = [
     { text: 'Productos', to: '/products/0/10', visible: role === 'ADMIN' },
     { text: 'Ubicaciones', to: '/locations/0/10', visible: role === 'ADMIN' },
-    { text: 'Inventario', to: '/inventoryComparison', visible: role === 'ADMIN' },
+    { text: 'Inventario', to: '/inventory-comparison', visible: role === 'ADMIN' },
+    { text: 'Ajuste', to: '/adjustment', visible: role === 'ADMIN' },
     { text: 'Existencias', to: '/storage-list/0/25', visible: role === 'ADMIN' },
     { text: 'Kardex', to: '/kardex/general', visible: role === 'ADMIN' },
     { text: 'Recepcion', to: '/reception', visible: role === 'ALMACENERO' },

@@ -46,4 +46,13 @@ public class Product {
 
     private String createdBy;
     private String modifiedBy;
+
+    public String generateCode() {
+        return category.getName().substring(0, 3).toUpperCase() + "-" + name.replaceAll(" ", "-").toUpperCase();
+    }
+
+
+    public String generateStringName() {
+        return "Product: " + name + ", Category: " + category.getName();
+    }
 }

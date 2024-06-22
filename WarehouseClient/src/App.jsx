@@ -29,6 +29,8 @@ import StorageTablePage from './components/StorageTablePage';
 import ProductKardexTablePage from './components/kardex/ProductKardexTablePage';
 import GeneralKardexTablePage from './components/kardex/GeneralKardexTablePage';
 import QRScanner from './components/common/QRScanner';
+import InventoryComparisonPage from './components/inventory/comparison/InventoryComparisonPage';
+import InventorySelector from './components/inventory/comparison/InventorySelector';
 import './index.css';
 
 
@@ -67,6 +69,8 @@ function App() {
           <Route path="/storage-list/:page/:size" element={<StorageTablePage />}/>
           <Route path="/kardex/product/:productId" element={<ProductKardexTablePage />} />
           <Route path="/kardex/general" element={<GeneralKardexTablePage />} />
+          <Route path="/inventory-comparison" element={<InventorySelector />} />
+        <Route path="/inventory-comparison/:inventoryMasterId" element={<InventoryComparisonPage />} />
         </Routes>
       </Router>
       <ToastContainer />

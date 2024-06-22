@@ -41,4 +41,12 @@ public class Location {
 
     private String createdBy;
     private String modifiedBy;
+
+    public String generateCode() {
+        return zone + "-" + aisle + "-" + shelf;
+    }
+
+    public String generateStringName() {
+        return "Zona: " + zone + ", Pasillo: " + aisle + ", Casillero: " + shelf;
+    }
 }

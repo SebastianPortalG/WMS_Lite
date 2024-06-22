@@ -77,6 +77,18 @@ public class InventoryController {
             return new ResponseEntity<>(new BasicCreationResponseDto(null, "Error: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/inventoryMasters/finished")
+    public ResponseEntity<?> fetchActiveInventoryMastersFinished() {
+        try {
+            List<InventoryMaster> activeInventoryMasters = inventoryService.getActiveInventoryMastersFinished();
+            List<ActiveInventoryMasterDto> activeInventoryMasterDtos = activeInventoryMasters.stream()
+                    .map(im -> new ActiveInventoryMasterDto(im.getInventoryMasterId(), im.getDescription(), im.getInventoryDate()))
+                    .toList();
+            return new ResponseEntity<>(activeInventoryMasterDtos, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new BasicCreationResponseDto(null, "Error: " + e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @PutMapping("/inventoryMasters/{inventoryMasterId}")
     public ResponseEntity<?> updateInventoryMaster(@PathVariable int inventoryMasterId, @RequestBody InventoryMasterRequestEnd updateRequest) {
         try {

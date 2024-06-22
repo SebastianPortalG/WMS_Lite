@@ -70,6 +70,7 @@ const ProductKardexTablePage = () => {
                         loading={loading}
                         pageSize={10}
                         getRowId={(row) => row.code + row.date}
+                        disablePagination
                     />
                 </Box>
             </StyledPaper>

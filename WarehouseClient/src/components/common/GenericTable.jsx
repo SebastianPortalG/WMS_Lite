@@ -5,7 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from 'react-router-dom';
 
-const GenericTable = ({ columns, rows, loading, onPaginationModelChange, rowCount, page, pageSize, onPageChange, onPageSizeChange, onEdit, onDelete, getRowId, showActions = false, showKardexButton = false }) => {
+const GenericTable = ({ columns, rows, loading, onPaginationModelChange, rowCount, page, pageSize, onPageChange, onPageSizeChange, onEdit, onDelete, getRowId, showActions = false, showKardexButton = false, disablePagination }) => {
   const navigate = useNavigate();
 
   const getActions = (params) => {
@@ -68,6 +68,7 @@ const GenericTable = ({ columns, rows, loading, onPaginationModelChange, rowCoun
         loading={loading}
         autoHeight
         getRowId={getRowId}
+        hideFooter={disablePagination}
       />
     </div>
   );

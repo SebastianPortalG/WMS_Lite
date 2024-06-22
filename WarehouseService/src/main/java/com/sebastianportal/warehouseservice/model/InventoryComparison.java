@@ -21,7 +21,7 @@ public class InventoryComparison {
     private Integer comparisonOpId;
 
     @ManyToOne
-    @JoinColumn(name = "inventoryOpId", nullable = false)
+    @JoinColumn(name = "inventoryOpId", nullable = true)
     private Inventory inventory;
 
     @ManyToOne
